@@ -2,6 +2,7 @@ const Product = require('../models/Product');
 const AWS = require('aws-sdk');
 const multer = require('multer');
 
+// product controller
 // Configure AWS S3
 const s3 = new AWS.S3({
   accessKeyId: process.env.AWS_ACCESS_KEY_ID,
