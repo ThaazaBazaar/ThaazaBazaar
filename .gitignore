@@ -1,2 +1,3 @@
+# can be used to make node_modules folder ignored
 node_modules
 .env
