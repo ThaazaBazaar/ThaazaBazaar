@@ -1,2 +1,0 @@
-# ThaazaBazaar
-Groceries Website
