@@ -15,8 +15,8 @@ import ProductList from './Pages/ProductList';
 import ProductDisplay from './Components/ProductDisplay/ProductDisplay';
 import Profile from './Pages/Profile';
 import Orders from './Pages/Orders';
-import Auth from './utils/PhoneAuth'
-import PhoneAuth from './utils/PhoneAuth';
+// import Auth from './utils/PhoneAuth'
+// import PhoneAuth from './utils/PhoneAuth';
 
 export const backend_url = "http://localhost:5000";
 function App() {
@@ -39,7 +39,7 @@ function App() {
           <Route path="/:category/:productId" element={<Product />} />
 
           <Route path="/cart" element={<Cart />} />
-          <Route path="/signup" element={<PhoneAuth />} />
+          <Route path="/signup" element={<LoginSignup />} />
           <Route path="/profile" element={<Profile />} />
           <Route path="/orders" element={<Orders />} />
         </Routes>
