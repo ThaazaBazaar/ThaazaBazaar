@@ -1,5 +1,6 @@
 const Product = require('../models/Product');
 const { s3, upload } = require('../config/multerAWS'); 
+const mongoose = require("mongoose");
 
 // Create a product with image upload
 const createProduct = async (req, res) => {
@@ -73,8 +74,16 @@ const getAllProducts = async (req, res) => {
 // };
 const deleteProduct = async (req, res) => {
     try {
+
+         const { id } = req.params;
+
+         // Validate the ID
+         if (!mongoose.Types.ObjectId.isValid(id)) {
+           return res.status(400).json({ message: "Invalid product ID" });
+        }
+        
         // Find the product by ID and delete it
-        const product = await Product.findByIdAndDelete(req.params.id);
+        const product = await Product.findByIdAndDelete(id);
 
         if (!product) {
             return res.status(404).json({ message: 'Product not found' });
@@ -89,10 +98,17 @@ const deleteProduct = async (req, res) => {
 
 const updateProduct = async (req, res) => {
     try {
+         const { id } = req.params;
+
+         // Validate the ID
+         if (!mongoose.Types.ObjectId.isValid(id)) {
+           return res.status(400).json({ message: "Invalid product ID" });
+         }
+
         const { name, description, category, new_price, old_price, stock_status } = req.body;
         
         // Find the product by ID
-        const product = await Product.findById(req.params.id);
+        const product = await Product.findById(id);
 
         if (!product) {
             return res.status(404).json({ message: 'Product not found' });
@@ -108,7 +124,7 @@ const updateProduct = async (req, res) => {
                 Key: `products/${Date.now()}_${req.file.originalname}`, // File name in S3
                 Body: req.file.buffer,
                 ContentType: req.file.mimetype, // MIME type
-                ACL: 'public-read', // Make the file public
+                // ACL: 'public-read', // Make the file public
             };
 
             // Upload the image to S3
