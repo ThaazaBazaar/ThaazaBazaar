@@ -7,6 +7,6 @@ const router = express.Router();
 router.post('/', protect, createOrder);
 
 // Get all orders (admin only)
-router.get('/', protect, getAllOrders);
+router.get('/',  getAllOrders);
 
 module.exports = router;
