@@ -31,6 +31,7 @@ const handlePhoneNumber = async (req, res) => {
     }
 };
 // Register User
+// auth controller for authenticating users
 const registerUser = async (req, res) => {
     const { name, email, password, isAdmin } = req.body;
     const userExists = await User.findOne({ email });
