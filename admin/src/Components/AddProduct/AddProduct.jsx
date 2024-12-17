@@ -1,9 +1,9 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import "./AddProduct.css";
 import upload_area from "../Assets/upload_area.svg";
 import { backend_url } from "../../App";
 
-const AddProduct = () => {
+const AddProduct = ({ productToEdit, fetchInfo, setIsEditing }) => {
   const [productDetails, setProductDetails] = useState({
     name: "",
     description: "",
@@ -16,22 +16,39 @@ const AddProduct = () => {
   const [loading, setLoading] = useState(false);
   const [errors, setErrors] = useState({});
 
+  // Pre-populate fields if editing
+  useEffect(() => {
+    if (productToEdit) {
+      setProductDetails({
+        name: productToEdit.name || "",
+        description: productToEdit.description || "",
+        category: productToEdit.category || "Fruits",
+        new_price: productToEdit.new_price || "",
+        old_price: productToEdit.old_price || "",
+        stock_status: productToEdit.stock_status || "InStock",
+      });
+      setImage(null); // Optional: Image will be updated only if a new one is selected
+    }
+  }, [productToEdit]);
+
+  // Validate form fields
   // Validate form fields
   const validateFields = () => {
     const newErrors = {};
-    if (!productDetails.name.trim())
+    if (!String(productDetails.name).trim())
       newErrors.name = "Product title is required.";
-    if (!productDetails.description.trim())
+    if (!String(productDetails.description).trim())
       newErrors.description = "Product description is required.";
-    if (!productDetails.old_price.trim())
+    if (!String(productDetails.old_price).trim())
       newErrors.old_price = "Price is required.";
     else if (!/^\d+$/.test(productDetails.old_price))
       newErrors.old_price = "Price must be a number.";
-    if (!productDetails.new_price.trim())
+    if (!String(productDetails.new_price).trim())
       newErrors.new_price = "Offer price is required.";
     else if (!/^\d+$/.test(productDetails.new_price))
       newErrors.new_price = "Offer price must be a number.";
-    if (!image) newErrors.image = "Product image is required.";
+    if (!image && !productToEdit)
+      newErrors.image = "Product image is required.";
     setErrors(newErrors);
     return Object.keys(newErrors).length === 0;
   };
@@ -44,7 +61,7 @@ const AddProduct = () => {
   };
 
   // Function to handle product addition
-  const handleAddProduct = async () => {
+  const handleSubmit = async () => {
     if (!validateFields()) return;
     setLoading(true);
 
@@ -55,29 +72,45 @@ const AddProduct = () => {
     formData.append("new_price", productDetails.new_price);
     formData.append("old_price", productDetails.old_price);
     formData.append("stock_status", productDetails.stock_status);
-    formData.append("image", image);
+    if (image) formData.append("image", image);
+
+    const url = productToEdit
+      ? `${backend_url}/api/products/${productToEdit._id}` // Update endpoint
+      : `${backend_url}/api/products`; // Add endpoint
+
+    const method = productToEdit ? "PUT" : "POST";
 
     try {
-      const response = await fetch(`${backend_url}/api/products`, {
-        method: "POST",
+      const response = await fetch(url, {
+        method,
         body: formData,
       });
 
       const result = await response.json();
 
       if (response.ok) {
-        alert("Product Added Successfully");
-        setProductDetails({
-          name: "",
-          description: "",
-          category: "Fruits",
-          new_price: "",
-          old_price: "",
-          stock_status: "InStock",
-        });
-        setImage(null);
+        alert(
+          productToEdit
+            ? "Product Updated Successfully"
+            : "Product Added Successfully"
+        );
+        if (productToEdit) {
+          fetchInfo();
+          setIsEditing(false);
+        }
+        else {
+          setProductDetails({
+            name: "",
+            description: "",
+            category: "Fruits",
+            new_price: "",
+            old_price: "",
+            stock_status: "InStock",
+          });
+          setImage(null);
+        }
       } else {
-        alert(result.message || "Failed to add product. Please try again.");
+        alert(result.message || "Failed to process product. Please try again.");
       }
     } catch (error) {
       console.error("Error:", error);
@@ -89,7 +122,7 @@ const AddProduct = () => {
 
   return (
     <div className="addproduct">
-      {/* Product Title */}
+      <h1>{productToEdit ? "Edit Product" : "Add Product"}</h1>
       <div className="addproduct-itemfield">
         <p>Product title</p>
         <input
@@ -182,7 +215,11 @@ const AddProduct = () => {
         <label htmlFor="file-input">
           <img
             className="addproduct-thumbnail-img"
-            src={!image ? upload_area : URL.createObjectURL(image)}
+            src={
+              !image
+                ? productToEdit?.image || upload_area
+                : URL.createObjectURL(image)
+            }
             alt="Product"
           />
         </label>
@@ -203,10 +240,14 @@ const AddProduct = () => {
       {/* Submit Button */}
       <button
         className="addproduct-btn"
-        onClick={handleAddProduct}
+        onClick={handleSubmit}
         disabled={loading}
       >
-        {loading ? "Adding..." : "ADD"}
+        {loading
+          ? "Processing..."
+          : productToEdit
+          ? "Update Product"
+          : "Add Product"}
       </button>
     </div>
   );
