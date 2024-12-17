@@ -26,7 +26,10 @@ const getAllOrders = async (req, res) => {
     const orders = await Order.find({}).populate('user', 'id name');
     res.json(orders);
 };
-
+// const getAllOrders = async (req, res) => {
+//     const orders = await Order.find({});
+//     res.json(orders);
+// };
 module.exports = {
     createOrder,
     getAllOrders,
