@@ -11,12 +11,14 @@ const Product = () => {
   // const {products}= useContext(ShopContext);
   // const product = products.find((e)=> e.id === Number(productId));
 
-  // Fetch product details from the backend
+  const { productId } = useParams(); // Get productId from route
   const [product, setProduct] = useState(null); // State for product details
   const [loading, setLoading] = useState(true); // State for loading indicator
-  // const [error, setError] = useState(null); // State for error handling
-  const { productId } = useParams();
+  const [error, setError] = useState(null); // State for error handling
+
+  // Fetch product details from the backend
   useEffect(() => {
+    // Fetch product details
     const fetchProductDetails = async () => {
       try {
         const response = await fetch(
@@ -26,39 +28,38 @@ const Product = () => {
           throw new Error("Failed to fetch product details");
         }
         const data = await response.json();
-        console.log(data);
-        console.log("We have one" + product);
         setProduct(data); // Set product details
-        // console.log(product);
       } catch (err) {
-        console.log(err.message); // Handle any error that occurs
+        setError(err.message);
       } finally {
-        setLoading(false); // Set loading to false once the request completes
+        setLoading(false);
       }
     };
 
     fetchProductDetails();
   }, [productId]);
-  // if (loading) {
-  //   return <div className="loading">Loading product details...</div>;
-  // }
 
-  // if (error) {
-  //   return <div className="error">{error}</div>;
-  // }
+  if (loading) {
+    return <div className="loading">Loading product details...</div>;
+  }
 
-  // if (!product) {
-  //   return <div className="no-product">Product not found!</div>;
-  // }
+  if (error) {
+    return <div className="error">{error}</div>;
+  }
+
+  if (!product) {
+    return <div className="no-product">Product not found!</div>;
+  }
+
   return (
     <div>
-      {/* <Breadcrum product={product}/> */}
-
-      {console.log("got here " + product)}
-      {console.log(product)}
-      <ProductDisplay />
-      <DescriptionBox />
-      {/* <RelatedProducts productId={productId} productCategory={product?.category} /> */}
+      <ProductDisplay product={product} /> {/* Pass product as prop */}
+      <DescriptionBox product={product} /> {/* Pass product as prop */}
+      <RelatedProducts
+        productId={product._id}
+        productCategory={product.category}
+      />
+      {/* Pass product details */}
     </div>
   );
 };

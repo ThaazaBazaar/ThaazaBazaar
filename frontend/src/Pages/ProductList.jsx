@@ -36,23 +36,19 @@ const ProductList = (props) => {
       </div> */}
       <div className="shopcategory-products">
         {products.length > 0 ? (
-          products.map((item, i) => {
-            if (props.category === item.category) {
-              return (
-                <Item
+          products
+            .filter((item) => props.category === item.category) // Filter by category
+            .map((item, i) => (
+              <Item
                 key={i}
                 id={item._id}
                 name={item.name}
                 image={item.image}
                 new_price={item.new_price}
                 old_price={item.old_price}
-                category={item.category}
-                />
-              );
-            } else {
-              return null;
-            }
-          })
+                category={item.category} // Pass category explicitly
+              />
+            ))
         ) : (
           <p>No Products Yet ....</p>
         )}

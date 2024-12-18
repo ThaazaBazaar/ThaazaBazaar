@@ -4,9 +4,11 @@ import { Link } from "react-router-dom";
 
 const Item = (props) => {
   if (!props) {
-    return (<div>Error Loading Product</div>);
+    return <div>Error Loading Product</div>;
   }
-  const category = props.category.toLowerCase();
+
+  const category = props.category ? props.category.toLowerCase() : "unknown"; // Default to "unknown" if undefined
+
   return (
     <div className="item">
       <Link to={`/${category}/${props.id}`}>

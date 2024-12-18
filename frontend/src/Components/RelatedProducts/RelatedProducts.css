@@ -1,61 +1,126 @@
-.relatedproducts{
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    gap: 10px;
-    padding: 10px 0 100px;
+.relatedproducts {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 10px;
+  padding: 10px 0 100px;
 }
-.relatedproducts h1{
-    color: #171717;
-    font-size: 40px;
-    font-weight: 600;
+.relatedproducts h1 {
+  color: #171717;
+  font-size: 40px;
+  font-weight: 600;
 }
-.relatedproducts hr{
+.relatedproducts hr {
+  width: 150px;
+  height: 4px;
+  border-radius: 10px;
+  background: #252525;
+}
+.relatedproducts-item {
+  margin-top: 50px;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 30px;
+  max-width: 1280px;
+}
+
+/* This CSS is for consistent display of related products without overflowing of text and diminished image */
+.relatedproducts .item {
+  width: 200px; /* Fixed width for consistent layout */
+  padding: 10px; /* Override padding */
+  border: 1px solid #ddd;
+  border-radius: 10px; /* Optional for rounded corners */
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between; /* as images are uneven space-between makes the text to go at end */
+  text-align: center; /* Center align text */
+  box-sizing: border-box; /* Include padding and borders in width */
+  transition: transform 0.3s ease; /* Smooth hover transition */
+  background: #f9f9f9; /* Optional: light background */
+  box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1); /* Add shadow for better visuals */
+}
+
+.relatedproducts .item img {
+  width: 100%; /* Ensure images fit inside the box */
+  height: auto; /* Maintain aspect ratio */
+  object-fit: cover; /* Crop images if necessary */
+  border-radius: 5px; /* Optional for aesthetics */
+}
+
+.relatedproducts .item .item-prices {
+  display: flex;
+  flex-direction: column; /* Stack prices vertically */
+  gap: 5px; /* Add spacing between prices */
+  margin-top: 10px;
+}
+
+.relatedproducts .item .item-price-new {
+  color: #59b280;
+  font-size: 18px;
+  font-weight: bold;
+}
+
+.relatedproducts .item .item-price-old {
+  color: #a5a5a5;
+  font-size: 14px;
+  font-weight: normal;
+  text-decoration: line-through;
+}
+
+.relatedproducts .item:hover {
+  transform: scale(1.03); /* Slight hover effect */
+}
+
+.shopcategory-loadmore {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin: 100px auto;
+  width: 200px;
+  height: 60px;
+  border-radius: 75px;
+  background-color: #59b280 !important;
+  background: #59b280 !important; /* Ensure shorthand background is also defined */
+  color: black !important;
+  font-size: 16px;
+  font-weight: 500;
+}
+
+.link{
+    margin-top: 0px;
+}
+
+@media (max-width: 800px) {
+  .shopcategory-loadmore {
+    margin: 60px auto;
     width: 150px;
+    height: 40px;
+    font-size: 13px;
+  }
+
+  /* This CSS is for consistent display of related products without overflowing of text and diminished image */
+  .relatedproducts .item {
+    width: 150px; /* Reduce size for smaller screens */
+  }
+}
+
+@media (max-width: 600px) {
+  .relatedproducts h1 {
+    font-size: 30px;
+  }
+  .relatedproducts hr {
+    width: 100px;
     height: 4px;
-    border-radius: 10px;
-    background: #252525;
-}
-.relatedproducts-item{
-    margin-top: 50px;
-    display: flex;
-    /* flex-wrap: wrap; */
-    justify-content: center;
-    gap: 30px;
-    max-width: 1280px;
-}
+  }
 
-.shopcategory-loadmore{
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    margin: 100px auto;
-    width: 200px;
-    height: 60px;
-    border-radius: 75px;
-    background: #59b280;
-    color: black;
-    font-size: 16px;
-    font-weight: 500;
-}
+  /* This CSS is for consistent display of related products without overflowing of text and diminished image */
+  .relatedproducts .item {
+    width: 120px; /* Further reduce size for very small screens */
+  }
 
-@media(max-width:600px){
-   
-    .relatedproducts h1{
-        font-size: 30px;
-    }
-    .relatedproducts hr{
-        width: 100px;
-        height: 4px;
-        
-    }
-}
-
-@media (max-width:800px) {
-     .shopcategory-loadmore{
-        margin: 60px auto;
-        width: 150px;
-        height: 40px;
-        font-size: 13px;
-    }
+  .relatedproducts .item .item-price-new,
+  .relatedproducts .item .item-price-old {
+    font-size: 12px; /* Adjust font sizes */
+  }
 }
