@@ -12,7 +12,7 @@ import men_banner from './Components/Assets/banner_mens.png'
 import women_banner from './Components/Assets/banner_women.png'
 import kid_banner from './Components/Assets/banner_kids.png'
 import ProductList from './Pages/ProductList';
-import ProductDisplay from './Components/ProductDisplay/ProductDisplay';
+// import ProductDisplay from './Components/ProductDisplay/ProductDisplay';
 import Profile from './Pages/Profile';
 import Orders from './Pages/Orders';
 // import Auth from './utils/PhoneAuth'

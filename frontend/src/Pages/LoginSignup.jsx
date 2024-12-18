@@ -74,7 +74,7 @@ const LoginSignup = () => {
           JSON.stringify({ phoneNumber: fullNumber })
         );
         alert("OTP verified! You are logged in.");
-        navigate("/"); // Redirect to Home 
+        navigate("/"); // Redirect to Home
       } else {
         alert(data.message || "Invalid OTP. Please try again.");
       }
@@ -84,6 +84,7 @@ const LoginSignup = () => {
     }
   };
 
+  // eslint-disable-next-line
   const handleGenerateOTP = () => {
     if (!phoneNumber) {
       alert("Please enter a valid phone number.");
@@ -130,12 +131,12 @@ const LoginSignup = () => {
           <input type="mobile" placeholder="Your Mobile" /> */}
               </div>
               <button onClick={sendOtp} disabled={loading}>
-                {loading ? <LoadingSpinner/> : "Generate OTP"}
+                {loading ? <LoadingSpinner /> : "Generate OTP"}
               </button>
             </>
           ) : (
             <div>
-              <label>Enter OTP:</label> 
+              <label>Enter OTP:</label>
               <input
                 type="text"
                 placeholder="Enter OTP"
