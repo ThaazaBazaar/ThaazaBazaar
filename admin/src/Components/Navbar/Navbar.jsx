@@ -1,5 +1,5 @@
 import React, {  useRef, useState, useEffect } from "react";
-import { useLocation, Link, useNavigate } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import "./Navbar.css";
 import logo from "../Assets/logo_letter.png";
 // import nav_dropdown from "../Assets/nav_dropdown.png";
@@ -10,7 +10,7 @@ const Navbar = () => {
   // const [menu, setMenu] = useState("shop");
   // const { getTotalCartItems } = useContext(ShopContext);
   // const menuRef = useRef();
-  const location = useLocation(); // Hook to get the current route
+  // const location = useLocation(); // Hook to get the current route
   const navigate = useNavigate();
   const dropdownRef = useRef(); // Reference for dropdown
   const [showDropdown, setShowDropdown] = useState(false);
@@ -53,7 +53,8 @@ const Navbar = () => {
         className="nav-logo"
       >
         <img src={logo} alt="" />
-        {/* <p>Thaza bazaar</p> */}
+        {/* <p>Admin</p> */}
+        <h4>Admin</h4>
       </Link>
         {/* <img
           onClick={dropdown_toggle}

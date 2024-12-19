@@ -1,0 +1,113 @@
+.loginsignup{
+    width: 100%;
+    min-height: 90vh;
+    /* background: #fce3fe;     */
+    padding-top: 100px;
+    /* margin: 30px; */
+}
+.loginsignup {
+    background-image: url('A:\my-projects-react\thaza\admin\src\Components\Assets\doodle_work.webp');
+    /* background-size: contain; */
+    /* background-repeat: repeat; */
+    background-position: center;
+    min-height: 100vh; /* Ensure full-page height */
+      /* background-image: url('path-to-your-image/doodle-pattern.png'); */
+    background-size: 200px 200px; /* Scale the pattern to a smaller size */
+    background-repeat: repeat; /* Ensure the pattern repeats seamlessly */
+    /* background-position: top left; Start the tiling from the top-left corner */
+}
+
+.loginsignup-container{
+    width: 90%;
+    max-width: 550px;
+    background: white;
+    /* margin: auto; */
+    padding: 30px 40px;
+    box-sizing: border-box;
+    margin:  30px  auto;
+}
+.loginsignup-container h1{
+    margin: 15px 0px;
+}
+.loginsignup-fields{
+    display: flex;
+    flex-direction: column;
+    gap: 25px;
+    margin-top: 20px;
+}
+.loginsignup-fields input{
+    height: 60px;
+    width: 100%;
+    padding-left: 20px;
+    border: 1px solid #c9c9c9;
+    outline: none;
+    color: #5c5c5c;
+    font-size: 18px;
+    box-sizing: border-box;
+}
+.loginsignup-container button{
+    width: 100%;
+    height: 60px;
+    color: white;
+    background: #59b280;
+    margin-top: 30px;
+    border: none;
+    font-size: 22px;
+    font-weight: 500;
+    cursor: pointer;
+}
+.loginsignup-login{
+    margin-top: 20px;
+    color: #5c5c5c;
+    font-size: 16px;
+    font-weight: 500;
+}
+.loginsignup-login span{
+    color: #59b280;
+    font-weight: 600;
+}
+.loginsignup-agree{
+    display: flex;
+    align-items: center;
+    margin-top: 18px;
+    gap: 10px;
+    color: #5c5c5c;
+    font-size: 15px;
+    font-weight: 500;
+}
+@media(max-width: 600px){
+    .loginsignup{
+        background-size: 100px 100px;
+    }
+    .loginsignup-container h1{
+        font-size: 22px;
+        margin: 0px;
+    }
+    .loginsignup-container{
+        padding: 30px 20px;
+    }
+    .loginsignup-fields input {
+        padding-left: 10px;
+        font-size: 16px;
+        height: 50px;
+    }
+    .countrycode-select{
+        padding-left: 10px;
+        font-size: 16px;
+        height: 50px;
+    }
+    .loginsignup-fields{
+        gap: 15px;
+    }
+    .loginsignup-container button{
+        height: 50px;
+        margin-top: 20px;
+        font-size: 17px;
+    }
+}
+
+@media (max-width: 800px) {
+    .loginsignup {
+        background-size: 150px 150px;
+    }
+}
