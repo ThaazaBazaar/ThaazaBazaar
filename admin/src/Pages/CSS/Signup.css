@@ -3,10 +3,10 @@
     min-height: 90vh;
     /* background: #fce3fe;     */
     padding-top: 100px;
-    padding-bottom: 30px;
+    /* margin: 30px; */
 }
 .loginsignup {
-    background-image: url('A:\my-projects-react\thaza\frontend\src\Components\Assets\doodle_work.webp');
+    background-image: url('A:\my-projects-react\thaza\admin\src\Components\Assets\doodle_work.webp');
     /* background-size: contain; */
     /* background-repeat: repeat; */
     background-position: center;
@@ -16,14 +16,15 @@
     background-repeat: repeat; /* Ensure the pattern repeats seamlessly */
     /* background-position: top left; Start the tiling from the top-left corner */
 }
+
 .loginsignup-container{
     width: 90%;
     max-width: 550px;
     background: white;
-    margin: auto;
+    /* margin: auto; */
     padding: 30px 40px;
     box-sizing: border-box;
-    /* margin:  30px  auto; */
+    margin:  30px  auto;
 }
 .loginsignup-container h1{
     margin: 15px 0px;
@@ -75,6 +76,9 @@
     font-weight: 500;
 }
 @media(max-width: 600px){
+    .loginsignup{
+        background-size: 100px 100px;
+    }
     .loginsignup-container h1{
         font-size: 22px;
         margin: 0px;
@@ -99,5 +103,11 @@
         height: 50px;
         margin-top: 20px;
         font-size: 17px;
+    }
+}
+
+@media (max-width: 800px) {
+    .loginsignup {
+        background-size: 150px 150px;
     }
 }
